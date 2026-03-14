@@ -83,11 +83,39 @@ body {
   justify-content: center;
 }
 
+/* Logo container helps with alignment */
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;   /* centers if needed */
+}
+
+/* The image itself */
+.logo img {
+  height: 52px;           /* ← adjust this to your preferred size */
+  width: 52px;            /* same value as height → forces square */
+  object-fit: cover;      /* crops if not perfectly square */
+  border-radius: 50%;     /* makes it fully round */
+  display: block;
+}
+
+.logo img:hover {
+  transform: scale(1.06);
+}
+
+/* Optional: make it a bit smaller on mobile */
+@media (max-width: 768px) {
+  .logo img {
+   height: 52px;              /* ← tune this value */
+  width: 52px;
+  }
+}
+
 /* ========================
    Hero
 ======================== */
 .hero {
-  padding: 140px 0 160px;
+  padding: 10px 0 160px;
   position: relative;
 }
 
@@ -184,7 +212,7 @@ h1 span {
    Categories
 ======================== */
 .categories {
-  padding: 120px 0;
+  padding: 0px 0;
   background: #fff8f4;
 }
 
@@ -203,45 +231,71 @@ h2 {
 }
 
 .category-card {
-  height: 260px;
+  height: 260px;                    /* or whatever height you want */
   border-radius: 16px;
   background-size: cover;
   background-position: center;
   position: relative;
   overflow: hidden;
   text-decoration: none;
-  display: flex;
-  align-items: flex-end;
-  padding: 24px;
+  display: flex;                    /* ← important */
+  align-items: center;              /* vertical center */
+  justify-content: center;          /* horizontal center */
   color: white;
-  font-weight: 600;
-  font-size: 1.4rem;
-  transition: transform 0.3s ease;
+  font-weight: 700;
+  font-size: 1.9rem;                /* ← big text size – adjust freely */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 20px;                    /* breathing room around text */
 }
 
 .category-card:hover {
-  transform: translateY(-12px);
+  transform: scale(1.04);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.18);
 }
 
+/* Overlay – full card coverage, strong but not pitch black */
 .category-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
+  pointer-events: none;             /* clicks go through to the <a> */
+  transition: background 0.4s ease;
+}
+
+/* Optional: darken on hover for better contrast */
+.category-card:hover .category-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+}
+
+/* Make sure text is above overlay and centered */
+.category-card span {
+  position: relative;               /* above overlay */
+  z-index: 2;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.7); /* better readability */
+  line-height: 1.2;
 }
 
 /* You should replace with real category background images */
-.category-card:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1519741497674-281450b3b0c1?w=800'); }
-.category-card:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=800'); }
-.category-card:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800'); }
-.category-card:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1605721911519-3d28c21a3c16?w=800'); }
-.category-card:nth-child(5) { background-image: url('https://images.unsplash.com/photo-1519227355832-637b2614d662?w=800'); }
-.category-card:nth-child(6) { background-image: url('https://images.unsplash.com/photo-1557683316-973673baf926?w=800'); }
+.category-card:nth-child(1) { background-image: url('images/daily-products.jpg'); }
+.category-card:nth-child(2) { background-image: url('images/digital-products.jpg'); }
+.category-card:nth-child(3) { background-image: url('images/e-books.jpg'); }
+.category-card:nth-child(4) { background-image: url('images/gifts.jpg'); }
+
 
 /* ========================
    Products
 ======================== */
 .bestsellers {
-  padding: 140px 0;
+  padding: 50px 0;
 }
 
 .section-lead {
